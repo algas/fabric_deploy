@@ -5,6 +5,7 @@ from fabric.decorators import *
 import logging
 
 from fabric_deploy.options import fetch
+from string import Template
 
 @task(default=True)
 @runs_once
@@ -39,6 +40,6 @@ def list_variables():
   ]
 
   for key in immediate_keys:
-    print("{key} = {val}".format(key=key, val=fetch(key)))
+    print(Template("${key} = ${val}").substitute(key=key, val=fetch(key)))
 
 # vim:set ft=python :
